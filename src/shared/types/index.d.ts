@@ -1,0 +1,1 @@
+export type TDefaultLocales = "en" | "ar"
