@@ -32,7 +32,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "TanStack Start Starter",
+        title: "نظام محطة الخرسانة",
       },
     ],
     links: [
@@ -51,7 +51,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider>
       <I18nProvider locale={locale}>
-        <html lang={locale}>
+        <html lang="ar" dir="rtl">
           <head>
             <HeadContent />
           </head>

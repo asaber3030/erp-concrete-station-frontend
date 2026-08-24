@@ -32,14 +32,14 @@ export const LanguageSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button>Language</Button>
+        <Button>اللغة</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem onClick={() => mutation.mutate("en")}>
-          English
+          الإنجليزية
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => mutation.mutate("ar")}>
-          Arabic
+          العربية
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

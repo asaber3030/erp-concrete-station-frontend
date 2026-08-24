@@ -9,48 +9,335 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DashboardUsersRouteImport } from './routes/dashboard/users'
+import { Route as DashboardUnitsRouteImport } from './routes/dashboard/units'
+import { Route as DashboardSuppliersRouteImport } from './routes/dashboard/suppliers'
+import { Route as DashboardStockMovementsRouteImport } from './routes/dashboard/stock-movements'
+import { Route as DashboardStationsRouteImport } from './routes/dashboard/stations'
+import { Route as DashboardSettlementsRouteImport } from './routes/dashboard/settlements'
+import { Route as DashboardPermissionsRouteImport } from './routes/dashboard/permissions'
+import { Route as DashboardInvoicesRouteImport } from './routes/dashboard/invoices'
+import { Route as DashboardInventoryRouteImport } from './routes/dashboard/inventory'
+import { Route as DashboardDisposalsRouteImport } from './routes/dashboard/disposals'
+import { Route as DashboardCategoriesRouteImport } from './routes/dashboard/categories'
+import { Route as DashboardAuditLogsRouteImport } from './routes/dashboard/audit-logs'
+import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard/analytics'
+import { Route as DashboardAccountRouteImport } from './routes/dashboard/account'
+import { Route as DashboardRolesIndexRouteImport } from './routes/dashboard/roles/index'
+import { Route as DashboardMaterialsIndexRouteImport } from './routes/dashboard/materials/index'
+import { Route as DashboardRolesCreateRouteImport } from './routes/dashboard/roles/create'
+import { Route as DashboardStationsStationIdDetailsRouteImport } from './routes/dashboard/stations/$stationId/details'
+import { Route as DashboardRolesRoleIdUpdateRouteImport } from './routes/dashboard/roles/$roleId/update'
+import { Route as DashboardMaterialsMaterialIdDetailsRouteImport } from './routes/dashboard/materials/$materialId/details'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
-  getParentRoute: () => rootRouteImport,
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardUsersRoute = DashboardUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardUnitsRoute = DashboardUnitsRouteImport.update({
+  id: '/units',
+  path: '/units',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSuppliersRoute = DashboardSuppliersRouteImport.update({
+  id: '/suppliers',
+  path: '/suppliers',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardStockMovementsRoute = DashboardStockMovementsRouteImport.update({
+  id: '/stock-movements',
+  path: '/stock-movements',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardStationsRoute = DashboardStationsRouteImport.update({
+  id: '/stations',
+  path: '/stations',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSettlementsRoute = DashboardSettlementsRouteImport.update({
+  id: '/settlements',
+  path: '/settlements',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardPermissionsRoute = DashboardPermissionsRouteImport.update({
+  id: '/permissions',
+  path: '/permissions',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardInvoicesRoute = DashboardInvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardInventoryRoute = DashboardInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardDisposalsRoute = DashboardDisposalsRouteImport.update({
+  id: '/disposals',
+  path: '/disposals',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCategoriesRoute = DashboardCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAuditLogsRoute = DashboardAuditLogsRouteImport.update({
+  id: '/audit-logs',
+  path: '/audit-logs',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAccountRoute = DashboardAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardRolesIndexRoute = DashboardRolesIndexRouteImport.update({
+  id: '/roles/',
+  path: '/roles/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardMaterialsIndexRoute = DashboardMaterialsIndexRouteImport.update({
+  id: '/materials/',
+  path: '/materials/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardRolesCreateRoute = DashboardRolesCreateRouteImport.update({
+  id: '/roles/create',
+  path: '/roles/create',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardStationsStationIdDetailsRoute =
+  DashboardStationsStationIdDetailsRouteImport.update({
+    id: '/$stationId/details',
+    path: '/$stationId/details',
+    getParentRoute: () => DashboardStationsRoute,
+  } as any)
+const DashboardRolesRoleIdUpdateRoute =
+  DashboardRolesRoleIdUpdateRouteImport.update({
+    id: '/roles/$roleId/update',
+    path: '/roles/$roleId/update',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardMaterialsMaterialIdDetailsRoute =
+  DashboardMaterialsMaterialIdDetailsRouteImport.update({
+    id: '/materials/$materialId/details',
+    path: '/materials/$materialId/details',
+    getParentRoute: () => DashboardRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/login': typeof LoginRoute
+  '/dashboard/account': typeof DashboardAccountRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/audit-logs': typeof DashboardAuditLogsRoute
+  '/dashboard/categories': typeof DashboardCategoriesRoute
+  '/dashboard/disposals': typeof DashboardDisposalsRoute
+  '/dashboard/inventory': typeof DashboardInventoryRoute
+  '/dashboard/invoices': typeof DashboardInvoicesRoute
+  '/dashboard/permissions': typeof DashboardPermissionsRoute
+  '/dashboard/settlements': typeof DashboardSettlementsRoute
+  '/dashboard/stations': typeof DashboardStationsRouteWithChildren
+  '/dashboard/stock-movements': typeof DashboardStockMovementsRoute
+  '/dashboard/suppliers': typeof DashboardSuppliersRoute
+  '/dashboard/units': typeof DashboardUnitsRoute
+  '/dashboard/users': typeof DashboardUsersRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/roles/create': typeof DashboardRolesCreateRoute
+  '/dashboard/materials/': typeof DashboardMaterialsIndexRoute
+  '/dashboard/roles/': typeof DashboardRolesIndexRoute
+  '/dashboard/materials/$materialId/details': typeof DashboardMaterialsMaterialIdDetailsRoute
+  '/dashboard/roles/$roleId/update': typeof DashboardRolesRoleIdUpdateRoute
+  '/dashboard/stations/$stationId/details': typeof DashboardStationsStationIdDetailsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/login': typeof LoginRoute
+  '/dashboard/account': typeof DashboardAccountRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/audit-logs': typeof DashboardAuditLogsRoute
+  '/dashboard/categories': typeof DashboardCategoriesRoute
+  '/dashboard/disposals': typeof DashboardDisposalsRoute
+  '/dashboard/inventory': typeof DashboardInventoryRoute
+  '/dashboard/invoices': typeof DashboardInvoicesRoute
+  '/dashboard/permissions': typeof DashboardPermissionsRoute
+  '/dashboard/settlements': typeof DashboardSettlementsRoute
+  '/dashboard/stations': typeof DashboardStationsRouteWithChildren
+  '/dashboard/stock-movements': typeof DashboardStockMovementsRoute
+  '/dashboard/suppliers': typeof DashboardSuppliersRoute
+  '/dashboard/units': typeof DashboardUnitsRoute
+  '/dashboard/users': typeof DashboardUsersRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/roles/create': typeof DashboardRolesCreateRoute
+  '/dashboard/materials': typeof DashboardMaterialsIndexRoute
+  '/dashboard/roles': typeof DashboardRolesIndexRoute
+  '/dashboard/materials/$materialId/details': typeof DashboardMaterialsMaterialIdDetailsRoute
+  '/dashboard/roles/$roleId/update': typeof DashboardRolesRoleIdUpdateRoute
+  '/dashboard/stations/$stationId/details': typeof DashboardStationsStationIdDetailsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/login': typeof LoginRoute
+  '/dashboard/account': typeof DashboardAccountRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/audit-logs': typeof DashboardAuditLogsRoute
+  '/dashboard/categories': typeof DashboardCategoriesRoute
+  '/dashboard/disposals': typeof DashboardDisposalsRoute
+  '/dashboard/inventory': typeof DashboardInventoryRoute
+  '/dashboard/invoices': typeof DashboardInvoicesRoute
+  '/dashboard/permissions': typeof DashboardPermissionsRoute
+  '/dashboard/settlements': typeof DashboardSettlementsRoute
+  '/dashboard/stations': typeof DashboardStationsRouteWithChildren
+  '/dashboard/stock-movements': typeof DashboardStockMovementsRoute
+  '/dashboard/suppliers': typeof DashboardSuppliersRoute
+  '/dashboard/units': typeof DashboardUnitsRoute
+  '/dashboard/users': typeof DashboardUsersRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/roles/create': typeof DashboardRolesCreateRoute
+  '/dashboard/materials/': typeof DashboardMaterialsIndexRoute
+  '/dashboard/roles/': typeof DashboardRolesIndexRoute
+  '/dashboard/materials/$materialId/details': typeof DashboardMaterialsMaterialIdDetailsRoute
+  '/dashboard/roles/$roleId/update': typeof DashboardRolesRoleIdUpdateRoute
+  '/dashboard/stations/$stationId/details': typeof DashboardStationsStationIdDetailsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/dashboard/account'
+    | '/dashboard/analytics'
+    | '/dashboard/audit-logs'
+    | '/dashboard/categories'
+    | '/dashboard/disposals'
+    | '/dashboard/inventory'
+    | '/dashboard/invoices'
+    | '/dashboard/permissions'
+    | '/dashboard/settlements'
+    | '/dashboard/stations'
+    | '/dashboard/stock-movements'
+    | '/dashboard/suppliers'
+    | '/dashboard/units'
+    | '/dashboard/users'
+    | '/dashboard/'
+    | '/dashboard/roles/create'
+    | '/dashboard/materials/'
+    | '/dashboard/roles/'
+    | '/dashboard/materials/$materialId/details'
+    | '/dashboard/roles/$roleId/update'
+    | '/dashboard/stations/$stationId/details'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/auth/$'
-  id: '__root__' | '/' | '/api/auth/$'
+  to:
+    | '/'
+    | '/login'
+    | '/dashboard/account'
+    | '/dashboard/analytics'
+    | '/dashboard/audit-logs'
+    | '/dashboard/categories'
+    | '/dashboard/disposals'
+    | '/dashboard/inventory'
+    | '/dashboard/invoices'
+    | '/dashboard/permissions'
+    | '/dashboard/settlements'
+    | '/dashboard/stations'
+    | '/dashboard/stock-movements'
+    | '/dashboard/suppliers'
+    | '/dashboard/units'
+    | '/dashboard/users'
+    | '/dashboard'
+    | '/dashboard/roles/create'
+    | '/dashboard/materials'
+    | '/dashboard/roles'
+    | '/dashboard/materials/$materialId/details'
+    | '/dashboard/roles/$roleId/update'
+    | '/dashboard/stations/$stationId/details'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/dashboard/account'
+    | '/dashboard/analytics'
+    | '/dashboard/audit-logs'
+    | '/dashboard/categories'
+    | '/dashboard/disposals'
+    | '/dashboard/inventory'
+    | '/dashboard/invoices'
+    | '/dashboard/permissions'
+    | '/dashboard/settlements'
+    | '/dashboard/stations'
+    | '/dashboard/stock-movements'
+    | '/dashboard/suppliers'
+    | '/dashboard/units'
+    | '/dashboard/users'
+    | '/dashboard/'
+    | '/dashboard/roles/create'
+    | '/dashboard/materials/'
+    | '/dashboard/roles/'
+    | '/dashboard/materials/$materialId/details'
+    | '/dashboard/roles/$roleId/update'
+    | '/dashboard/stations/$stationId/details'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -58,19 +345,223 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatRouteImport
-      parentRoute: typeof rootRouteImport
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/users': {
+      id: '/dashboard/users'
+      path: '/users'
+      fullPath: '/dashboard/users'
+      preLoaderRoute: typeof DashboardUsersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/units': {
+      id: '/dashboard/units'
+      path: '/units'
+      fullPath: '/dashboard/units'
+      preLoaderRoute: typeof DashboardUnitsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/suppliers': {
+      id: '/dashboard/suppliers'
+      path: '/suppliers'
+      fullPath: '/dashboard/suppliers'
+      preLoaderRoute: typeof DashboardSuppliersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/stock-movements': {
+      id: '/dashboard/stock-movements'
+      path: '/stock-movements'
+      fullPath: '/dashboard/stock-movements'
+      preLoaderRoute: typeof DashboardStockMovementsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/stations': {
+      id: '/dashboard/stations'
+      path: '/stations'
+      fullPath: '/dashboard/stations'
+      preLoaderRoute: typeof DashboardStationsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/settlements': {
+      id: '/dashboard/settlements'
+      path: '/settlements'
+      fullPath: '/dashboard/settlements'
+      preLoaderRoute: typeof DashboardSettlementsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/permissions': {
+      id: '/dashboard/permissions'
+      path: '/permissions'
+      fullPath: '/dashboard/permissions'
+      preLoaderRoute: typeof DashboardPermissionsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/invoices': {
+      id: '/dashboard/invoices'
+      path: '/invoices'
+      fullPath: '/dashboard/invoices'
+      preLoaderRoute: typeof DashboardInvoicesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/inventory': {
+      id: '/dashboard/inventory'
+      path: '/inventory'
+      fullPath: '/dashboard/inventory'
+      preLoaderRoute: typeof DashboardInventoryRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/disposals': {
+      id: '/dashboard/disposals'
+      path: '/disposals'
+      fullPath: '/dashboard/disposals'
+      preLoaderRoute: typeof DashboardDisposalsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/categories': {
+      id: '/dashboard/categories'
+      path: '/categories'
+      fullPath: '/dashboard/categories'
+      preLoaderRoute: typeof DashboardCategoriesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/audit-logs': {
+      id: '/dashboard/audit-logs'
+      path: '/audit-logs'
+      fullPath: '/dashboard/audit-logs'
+      preLoaderRoute: typeof DashboardAuditLogsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/analytics': {
+      id: '/dashboard/analytics'
+      path: '/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardAnalyticsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/account': {
+      id: '/dashboard/account'
+      path: '/account'
+      fullPath: '/dashboard/account'
+      preLoaderRoute: typeof DashboardAccountRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/roles/': {
+      id: '/dashboard/roles/'
+      path: '/roles'
+      fullPath: '/dashboard/roles/'
+      preLoaderRoute: typeof DashboardRolesIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/materials/': {
+      id: '/dashboard/materials/'
+      path: '/materials'
+      fullPath: '/dashboard/materials/'
+      preLoaderRoute: typeof DashboardMaterialsIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/roles/create': {
+      id: '/dashboard/roles/create'
+      path: '/roles/create'
+      fullPath: '/dashboard/roles/create'
+      preLoaderRoute: typeof DashboardRolesCreateRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/stations/$stationId/details': {
+      id: '/dashboard/stations/$stationId/details'
+      path: '/$stationId/details'
+      fullPath: '/dashboard/stations/$stationId/details'
+      preLoaderRoute: typeof DashboardStationsStationIdDetailsRouteImport
+      parentRoute: typeof DashboardStationsRoute
+    }
+    '/dashboard/roles/$roleId/update': {
+      id: '/dashboard/roles/$roleId/update'
+      path: '/roles/$roleId/update'
+      fullPath: '/dashboard/roles/$roleId/update'
+      preLoaderRoute: typeof DashboardRolesRoleIdUpdateRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/materials/$materialId/details': {
+      id: '/dashboard/materials/$materialId/details'
+      path: '/materials/$materialId/details'
+      fullPath: '/dashboard/materials/$materialId/details'
+      preLoaderRoute: typeof DashboardMaterialsMaterialIdDetailsRouteImport
+      parentRoute: typeof DashboardRoute
     }
   }
 }
 
+interface DashboardStationsRouteChildren {
+  DashboardStationsStationIdDetailsRoute: typeof DashboardStationsStationIdDetailsRoute
+}
+
+const DashboardStationsRouteChildren: DashboardStationsRouteChildren = {
+  DashboardStationsStationIdDetailsRoute:
+    DashboardStationsStationIdDetailsRoute,
+}
+
+const DashboardStationsRouteWithChildren =
+  DashboardStationsRoute._addFileChildren(DashboardStationsRouteChildren)
+
+interface DashboardRouteChildren {
+  DashboardAccountRoute: typeof DashboardAccountRoute
+  DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
+  DashboardAuditLogsRoute: typeof DashboardAuditLogsRoute
+  DashboardCategoriesRoute: typeof DashboardCategoriesRoute
+  DashboardDisposalsRoute: typeof DashboardDisposalsRoute
+  DashboardInventoryRoute: typeof DashboardInventoryRoute
+  DashboardInvoicesRoute: typeof DashboardInvoicesRoute
+  DashboardPermissionsRoute: typeof DashboardPermissionsRoute
+  DashboardSettlementsRoute: typeof DashboardSettlementsRoute
+  DashboardStationsRoute: typeof DashboardStationsRouteWithChildren
+  DashboardStockMovementsRoute: typeof DashboardStockMovementsRoute
+  DashboardSuppliersRoute: typeof DashboardSuppliersRoute
+  DashboardUnitsRoute: typeof DashboardUnitsRoute
+  DashboardUsersRoute: typeof DashboardUsersRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardRolesCreateRoute: typeof DashboardRolesCreateRoute
+  DashboardMaterialsIndexRoute: typeof DashboardMaterialsIndexRoute
+  DashboardRolesIndexRoute: typeof DashboardRolesIndexRoute
+  DashboardMaterialsMaterialIdDetailsRoute: typeof DashboardMaterialsMaterialIdDetailsRoute
+  DashboardRolesRoleIdUpdateRoute: typeof DashboardRolesRoleIdUpdateRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAccountRoute: DashboardAccountRoute,
+  DashboardAnalyticsRoute: DashboardAnalyticsRoute,
+  DashboardAuditLogsRoute: DashboardAuditLogsRoute,
+  DashboardCategoriesRoute: DashboardCategoriesRoute,
+  DashboardDisposalsRoute: DashboardDisposalsRoute,
+  DashboardInventoryRoute: DashboardInventoryRoute,
+  DashboardInvoicesRoute: DashboardInvoicesRoute,
+  DashboardPermissionsRoute: DashboardPermissionsRoute,
+  DashboardSettlementsRoute: DashboardSettlementsRoute,
+  DashboardStationsRoute: DashboardStationsRouteWithChildren,
+  DashboardStockMovementsRoute: DashboardStockMovementsRoute,
+  DashboardSuppliersRoute: DashboardSuppliersRoute,
+  DashboardUnitsRoute: DashboardUnitsRoute,
+  DashboardUsersRoute: DashboardUsersRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+  DashboardRolesCreateRoute: DashboardRolesCreateRoute,
+  DashboardMaterialsIndexRoute: DashboardMaterialsIndexRoute,
+  DashboardRolesIndexRoute: DashboardRolesIndexRoute,
+  DashboardMaterialsMaterialIdDetailsRoute:
+    DashboardMaterialsMaterialIdDetailsRoute,
+  DashboardRolesRoleIdUpdateRoute: DashboardRolesRoleIdUpdateRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ApiAuthSplatRoute: ApiAuthSplatRoute,
+  DashboardRoute: DashboardRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

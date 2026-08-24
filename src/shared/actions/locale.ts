@@ -9,7 +9,7 @@ export const getLocale = createServerFn({ method: "GET" }).handler(() => {
     value as TDefaultLocales,
   )
     ? (value as TDefaultLocales)
-    : ("en" as TDefaultLocales);
+    : ("ar" as TDefaultLocales);
   return finalValue;
 });
 

@@ -1,0 +1,99 @@
+{
+  "info": {
+    "_postman_id": "9d7539d1-af61-4af4-837f-5fb32162cee8",
+    "name": "Concrete Factory ERP API",
+    "description": "Gateway API. Login first; the access token is saved to the collection variable.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "accessToken", "value": "" },
+    { "key": "categoryId", "value": "" },
+    { "key": "unitId", "value": "" },
+    { "key": "materialId", "value": "" },
+    { "key": "stationId", "value": "" },
+    { "key": "supplierId", "value": "" },
+    { "key": "invoiceId", "value": "" },
+    { "key": "inventoryId", "value": "" },
+    { "key": "disposalId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [{ "listen": "test", "script": { "exec": ["const response = pm.response.json();", "pm.collectionVariables.set('accessToken', response.accessToken);"], "type": "text/javascript" } }],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"admin\",\n  \"password\": \"admin123\"\n}" }, "url": "{{baseUrl}}/auth/login" }
+        },
+        { "name": "My profile", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/auth/me" } },
+        { "name": "Change details", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"admin\"\n}" }, "url": "{{baseUrl}}/auth/details" } },
+        { "name": "Change password", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"currentPassword\": \"admin123\",\n  \"newPassword\": \"new-password-123\"\n}" }, "url": "{{baseUrl}}/auth/change-password" } }
+      ]
+    },
+    {
+      "name": "Authorization",
+      "item": [
+        { "name": "List users", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/users" } },
+        { "name": "Create user", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"operator\",\n  \"password\": \"operator123\",\n  \"roleId\": 1\n}" }, "url": "{{baseUrl}}/users" } },
+        { "name": "List roles", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/roles" } },
+        { "name": "List permissions", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/permissions" } }
+      ]
+    },
+    {
+      "name": "Master data",
+      "item": [
+        { "name": "List materials (filtered)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/materials?search=cement&categoryId={{categoryId}}&unitId={{unitId}}&isActive=true" } },
+        { "name": "Create material", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Portland Cement\",\n  \"sku\": \"CEM-001\",\n  \"categoryId\": \"{{categoryId}}\",\n  \"unitId\": \"{{unitId}}\",\n  \"reorderLevel\": 10,\n  \"isActive\": true\n}" }, "url": "{{baseUrl}}/materials" } },
+        { "name": "Update material", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"reorderLevel\": 15\n}" }, "url": "{{baseUrl}}/materials/{{materialId}}" } },
+        { "name": "Delete material", "request": { "method": "DELETE", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/materials/{{materialId}}" } },
+        { "name": "List categories", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/categories?search=&isActive=true" } },
+        { "name": "Create category", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Cement\",\n  \"code\": \"CEMENT\",\n  \"isActive\": true\n}" }, "url": "{{baseUrl}}/categories" } },
+        { "name": "List units", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/units?isActive=true" } },
+        { "name": "Create unit", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Tonne\",\n  \"symbol\": \"t\",\n  \"isActive\": true\n}" }, "url": "{{baseUrl}}/units" } },
+        { "name": "List suppliers", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/suppliers?isActive=true" } },
+        { "name": "Create supplier", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Acme Supply\",\n  \"code\": \"ACME\",\n  \"contactInfo\": \"orders@acme.test\",\n  \"isActive\": true\n}" }, "url": "{{baseUrl}}/suppliers" } },
+        { "name": "List stations", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/stations?isActive=true" } },
+        { "name": "Create station", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Main Plant\",\n  \"code\": \"MAIN\",\n  \"location\": \"Yard A\",\n  \"isActive\": true\n}" }, "url": "{{baseUrl}}/stations" } }
+      ]
+    },
+    {
+      "name": "Operations",
+      "item": [
+        { "name": "List inventory", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/inventory?materialId={{materialId}}&stationId={{stationId}}&belowReorder=false" } },
+        { "name": "Adjust inventory", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"materialId\": \"{{materialId}}\",\n  \"stationId\": \"{{stationId}}\",\n  \"quantity\": 25,\n  \"type\": \"incoming\",\n  \"referenceNumber\": \"GRN-001\",\n  \"supplierId\": \"{{supplierId}}\"\n}" }, "url": "{{baseUrl}}/inventory/adjustments" } },
+        { "name": "Reserve inventory", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"quantity\": 5\n}" }, "url": "{{baseUrl}}/inventory/{{inventoryId}}/reserve" } },
+        { "name": "List stock movements", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/stock-movements?materialId={{materialId}}&stationId={{stationId}}&type=incoming" } },
+        { "name": "Create invoice", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"invoiceNumber\": \"PUR-001\",\n  \"type\": \"purchase\",\n  \"supplierId\": \"{{supplierId}}\",\n  \"partyName\": \"Acme Supply\",\n  \"totalAmount\": 1200\n}" }, "url": "{{baseUrl}}/invoices" } },
+        { "name": "List invoices", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/invoices?status=draft&type=purchase&supplierId={{supplierId}}" } },
+        { "name": "Update invoice", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"totalAmount\": 1250\n}" }, "url": "{{baseUrl}}/invoices/{{invoiceId}}" } },
+        { "name": "Issue invoice", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/invoices/{{invoiceId}}/issue" } },
+        { "name": "Delete invoice", "request": { "method": "DELETE", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/invoices/{{invoiceId}}" } }
+      ]
+    },
+    {
+      "name": "Disposal and audit",
+      "item": [
+        { "name": "Create disposal", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"materialId\": \"{{materialId}}\",\n  \"stationId\": \"{{stationId}}\",\n  \"quantity\": 1,\n  \"reason\": \"Damaged bag\"\n}" }, "url": "{{baseUrl}}/disposals" } },
+        { "name": "List disposals", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/disposals?materialId={{materialId}}&stationId={{stationId}}&status=pending" } },
+        { "name": "Approve disposal", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"status\": \"approved\"\n}" }, "url": "{{baseUrl}}/disposals/{{disposalId}}/approve" } },
+        { "name": "Create settlement", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"materialId\": \"{{materialId}}\",\n  \"stationId\": \"{{stationId}}\",\n  \"createdById\": 1,\n  \"type\": \"positive\",\n  \"quantity\": 1,\n  \"reason\": \"Cycle count\",\n  \"previousQty\": 24,\n  \"newQty\": 25\n}" }, "url": "{{baseUrl}}/settlements" } },
+        { "name": "List settlements", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/settlements?materialId={{materialId}}&stationId={{stationId}}" } },
+        { "name": "List audit logs", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }], "url": "{{baseUrl}}/audit-logs?entityType=&entityId=&performedBy=1" } }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Station monthly analytics",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": "{{baseUrl}}/analytics/stations/{{stationId}}?month=2026-08"
+          }
+        }
+      ]
+    }
+  ]
+}

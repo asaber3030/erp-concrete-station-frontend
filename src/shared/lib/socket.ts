@@ -1,6 +1,6 @@
-import { getCookie } from "@tanstack/react-start/server"
 import { io, Socket } from "socket.io-client"
 import { AUTH_CONFIG } from "../config/app/auth"
+import { APP_CONFIG } from "../config/app"
 
 let socket: Socket | null = null
 
@@ -9,14 +9,17 @@ export const initializeSocket = (): Socket => {
     socket.disconnect()
   }
 
-  const token = getCookie(AUTH_CONFIG.tokenCookieName)
+  const token = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${AUTH_CONFIG.tokenCookieName}=`))
+    ?.split("=")[1]
 
-  socket = io(appConfig.socketUrl, {
+  socket = io(APP_CONFIG.socketUrl, {
     transports: ["websocket"],
-    autoConnect: appConfig.socket.autoConnect,
-    reconnection: appConfig.socket.reconnection,
-    reconnectionAttempts: appConfig.socket.reconnectionAttempts,
-    reconnectionDelay: appConfig.socket.reconnectionDelay,
+    autoConnect: false,
+    reconnection: true,
+    reconnectionAttempts: 5,
+    reconnectionDelay: 1000,
     auth: { token: token },
     extraHeaders: { Authorization: `Bearer ${token}` },
   })
