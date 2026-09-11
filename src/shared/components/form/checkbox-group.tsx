@@ -1,16 +1,8 @@
 import { Checkbox } from "#/shared/components/ui/checkbox"
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  FieldLegend,
-  FieldSet,
-} from "#/shared/components/ui/field"
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "#/shared/components/ui/field"
 
-import { useFieldContext } from "#/shared/lib/form";
-import { useFieldError } from "#/shared/hooks/useFieldError";
+import { useFieldContext } from "#/shared/lib/form"
+import { useFieldError } from "#/shared/hooks/useFieldError"
 
 export type CheckboxGroupOption = {
   id: string
@@ -36,7 +28,7 @@ export function CheckboxGroupField({ legend, description, options }: CheckboxGro
     <FieldSet>
       <FieldLegend variant="label">{legend}</FieldLegend>
       {description && <FieldDescription>{description}</FieldDescription>}
-      <FieldGroup data-slot="checkbox-group">
+      <FieldGroup data-slot="checkbox-group" className="grid grid-cols-4 gap-4">
         {options.map((option) => (
           <Field key={option.id} orientation="horizontal" data-invalid={isInvalid}>
             <Checkbox

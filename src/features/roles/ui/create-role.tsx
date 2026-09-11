@@ -1,13 +1,15 @@
-import { usePermissionsQuery } from "#/features/permissions/hooks/use-permissions"
-import { Button } from "#/shared/components/ui/button"
+import { useAllPermissionsQuery } from "#/features/permissions/hooks/use-permissions"
 import { useAppForm } from "#/shared/hooks/useAppForm"
 import { toast } from "sonner"
 import { useCreateRoleMutation } from "../hooks/use-roles"
 import { createRoleFormSchema } from "../model/schema"
+import { useState } from "react"
+import { Checkbox } from "#/shared/components/ui/checkbox"
+import { Label } from "#/shared/components/ui/label"
 
 export function CreateRole() {
   const createMutation = useCreateRoleMutation()
-  const permissions = usePermissionsQuery()
+  const permissions = useAllPermissionsQuery()
 
   const form = useAppForm({
     defaultValues: {
@@ -56,11 +58,28 @@ export function CreateRole() {
 
       <form.AppField name="label">{(field) => <field.TextField label="الوصف" placeholder="وصف مختصر لمسؤوليات هذا الدور" />}</form.AppField>
 
-      <div className="grid grid-cols-6">
-        <form.AppField name="permissions" mode="array">
-          {(field) => <field.CheckboxGroupField legend="الصلاحيات" options={permissionOptions} />}
-        </form.AppField>
-      </div>
+      {permissions.data && (
+        <div className="flex gap-2">
+          <Checkbox
+            onCheckedChange={(state) => {
+              if (state) {
+                form.setFieldValue(
+                  "permissions",
+                  permissions.data.map((i) => String(i.id)),
+                )
+              } else {
+                form.setFieldValue("permissions", [])
+              }
+            }}
+          />
+
+          <Label>كل الصلاحيات</Label>
+        </div>
+      )}
+
+      <form.AppField name="permissions" mode="array">
+        {(field) => <field.CheckboxGroupField legend="الصلاحيات" options={permissionOptions} />}
+      </form.AppField>
 
       <div className="mt-2">
         <form.AppForm>

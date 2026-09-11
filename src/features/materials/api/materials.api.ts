@@ -1,10 +1,11 @@
 import { createServerFn } from "@tanstack/react-start"
 
-import { api, toPaginated, type PaginatedResponse } from "#/shared/api/http"
+import { api, toPaginated } from "#/shared/api/http"
 import { createMaterialSchema, materialQueryParamsSchema, updateMaterialSchema } from "../model/schema"
 import { idSchema } from "#/shared/schema"
 
 import type { CreateMaterialInput, FullMaterial, Material, MaterialQueryParams, UpdateMaterialInput } from "../model/types"
+import type { PaginatedResponse } from "#/shared/types"
 
 export const listMaterials = createServerFn({ method: "GET" })
   .validator((data: MaterialQueryParams) => materialQueryParamsSchema.parse(data))

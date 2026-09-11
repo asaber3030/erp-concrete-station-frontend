@@ -1,4 +1,4 @@
-import { usePermissionsQuery } from "#/features/permissions/hooks/use-permissions"
+import { useAllPermissionsQuery } from "#/features/permissions/hooks/use-permissions"
 import { useAppForm } from "#/shared/hooks/useAppForm"
 import { useUpdateRoleMutation } from "../hooks/use-roles"
 import { updateRoleFormSchema } from "../model/schema"
@@ -10,10 +10,10 @@ type UpdateRoleProps = {
 
 export function UpdateRole({ role }: UpdateRoleProps) {
   const updateMutation = useUpdateRoleMutation()
-  const permissions = usePermissionsQuery()
+  const permissions = useAllPermissionsQuery()
 
   const permissionOptions = (permissions.data ?? []).map((p) => ({
-    id: String(p.id),
+    id: Number(p.id),
     label: p.name,
   }))
 
@@ -21,7 +21,7 @@ export function UpdateRole({ role }: UpdateRoleProps) {
     defaultValues: {
       name: role?.name ?? "",
       label: role?.label ?? "",
-      permissions: role?.rolePermissions?.map((item) => String(item.permissionId)) ?? [],
+      permissions: role?.rolePermissions?.map((item) => Number(item.permissionId)) ?? [],
     },
     validators: {
       onSubmit: updateRoleFormSchema,
@@ -56,11 +56,9 @@ export function UpdateRole({ role }: UpdateRoleProps) {
       <form.AppField name="name">{(field) => <field.TextField label="اسم الدور" placeholder="مثال: مدير المحطة" />}</form.AppField>
       <form.AppField name="label">{(field) => <field.TextField label="الوصف" placeholder="وصف مختصر لمسؤوليات هذا الدور" />}</form.AppField>
 
-      <div className="grid grid-cols-6">
-        <form.AppField name="permissions" mode="array">
-          {(field) => <field.CheckboxGroupField legend="الصلاحيات" options={permissionOptions} />}
-        </form.AppField>
-      </div>
+      <form.AppField name="permissions" mode="array">
+        {(field) => <field.CheckboxGroupField legend="الصلاحيات" options={permissionOptions} />}
+      </form.AppField>
 
       <div className="mt-2">
         <form.AppForm>

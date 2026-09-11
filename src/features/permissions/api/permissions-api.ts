@@ -18,3 +18,13 @@ export const listPermissions = createServerFn({ method: "GET" })
     })
     return toList(payload.data)
   })
+
+export const listAllPermissions = createServerFn({ method: "GET" })
+  .validator((data?: { search?: string }) => data ?? {})
+  .handler(async ({ data }) => {
+    const payload = await api.get<Permission[]>("/permissions-all", {
+      headers: getAuthHeaders(),
+      params: data,
+    })
+    return toList(payload.data)
+  })
